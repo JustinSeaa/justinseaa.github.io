@@ -10,7 +10,7 @@
         // -1 -> 1
         vec2 clipSpacePosition = (normalizedPosition * 2.0) - 1.0;
         gl_Position = vec4(clipSpacePosition * vec2(1, -1), 0, 1);
-        gl_PointSize = 1.0;
+        gl_PointSize = 10.0;
         vColor = colour;
       }</script><script id="fragmentShader_particle" type="x-shader/x-fragment">varying lowp vec3 vColor;
 
