@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><link rel="shortcut icon" href="favicons/3283--favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.json"><title>Thisissand</title><meta name="description" content="Thisissand is a unique playground for creating and sharing amazing sandscapes on your computer or mobile device. Start pouring away to experience this special sand piling on your screen!"><meta property="og:title" content="Thisissand"><meta property="og:site_name" content="Thisissand"><meta property="og:description" content="Thisissand is a unique playground for creating and sharing amazing sandscapes on your computer or mobile device. Start pouring away to experience this special sand piling on your screen!"><script defer src="js/js-main.b20fbf15.js"></script><link href="css/css-main.a5270368.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><script id="vertexShader_particle" type="x-shader/x-vertex">uniform vec2 u_resolution;
+      attribute vec4 position;
+      attribute vec3 colour;
+      varying vec3 vColor;
+
+      void main(void) {
+        // 1 -> 0
+        vec2 normalizedPosition = (position.xy + 0.5) / u_resolution;
+        // -1 -> 1
+        vec2 clipSpacePosition = (normalizedPosition * 2.0) - 1.0;
+        gl_Position = vec4(clipSpacePosition * vec2(1, -1), 0, 1);
+        gl_PointSize = 1.0;
+        vColor = colour;
+      }</script><script id="fragmentShader_particle" type="x-shader/x-fragment">varying lowp vec3 vColor;
+
+       void main(void) {
+          gl_FragColor = vec4(vColor.bgr, 1.0);
+       }</script><script id="vertexShader_texture" type="x-shader/x-vertex">attribute vec4 a_position;
+      attribute vec2 a_texcoord;
+      varying vec2 v_texcoord;
+
+      void main(void) {
+        gl_Position = a_position;
+        v_texcoord = a_texcoord;
+       }</script><script id="fragmentShader_texture" type="x-shader/x-fragment">precision mediump float;
+      varying lowp vec2 v_texcoord;
+      uniform sampler2D u_texture;
+      uniform float flipper;
+
+      void main(void) {
+        float tex_y = flipper > 0.5 ? 1.0-v_texcoord.y : v_texcoord.y;
+        gl_FragColor = texture2D(u_texture, vec2(v_texcoord.x, tex_y));	//v_texcoord
+      }</script><div id="root"></div><div id="modal"></div></body></html>
